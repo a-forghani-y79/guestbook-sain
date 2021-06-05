@@ -14,10 +14,21 @@
 
 package com.liferay.docs.guestbook.service.impl;
 
+import com.liferay.docs.guestbook.exception.GuestbookNameException;
+import com.liferay.docs.guestbook.model.GuestBook;
 import com.liferay.docs.guestbook.service.base.GuestBookLocalServiceBaseImpl;
 import com.liferay.portal.aop.AopService;
 
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.model.User;
+import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.Validator;
+import com.sun.tools.javac.tree.DCTree;
 import org.osgi.service.component.annotations.Component;
+
+import java.util.Date;
+import java.util.List;
 
 /**
  * The implementation of the guest book local service.
@@ -43,4 +54,46 @@ public class GuestBookLocalServiceImpl extends GuestBookLocalServiceBaseImpl {
 	 *
 	 * Never reference this class directly. Use <code>com.liferay.docs.guestbook.service.GuestBookLocalService</code> via injection or a <code>org.osgi.util.tracker.ServiceTracker</code> or use <code>com.liferay.docs.guestbook.service.GuestBookLocalServiceUtil</code>.
 	 */
+
+	public GuestBook addGuestBook(long userId , String name, ServiceContext serviceContext) throws PortalException {
+		long groupId = serviceContext.getScopeGroupId();
+		User user = userLocalService.getUserById(userId);
+		Date date = new Date();
+		validate(name);
+		long guestbookId = counterLocalService.increment();
+		GuestBook guestBook = guestBookPersistence.create(guestbookId);
+		guestBook.setUuid(serviceContext.getUuid());
+		guestBook.setUserId(userId);
+		guestBook.setGroupId(groupId);
+		guestBook.setCompanyId(user.getCompanyId());
+		guestBook.setUserName(user.getFullName());
+		guestBook.setCreateDate(serviceContext.getCreateDate(date));
+		guestBook.setModifiedDate(serviceContext.getModifiedDate(date));
+		guestBook.setName(name);
+		// i dont know what is this !!!
+		guestBook.setExpandoBridgeAttributes(serviceContext);
+		guestBookPersistence.update(guestBook);
+
+		return guestBook;
+	}
+
+
+	//methods for getting guestbooks
+	//depends on G_G finder
+	public List<GuestBook> getGuestbooks(long groupId){
+		return guestBookPersistence.findByGroupId(groupId);
+	}
+	public List<GuestBook> getGuestbooks(long groupId, int start, int end, OrderByComparator<GuestBook> obc){
+		return guestBookPersistence.findByGroupId(groupId,start,end,obc);
+	}
+	public List<GuestBook> getGuestbooks(long groupId, int start, int end){
+		return guestBookPersistence.findByGroupId(groupId, start, end);
+	}
+	public int getGuestBooksCount(long groupId){
+		return guestBookPersistence.countByGroupId(groupId);
+	}
+	private void validate(String name) throws GuestbookNameException {
+		if (Validator.isNull(name))
+			throw new GuestbookNameException();
+	}
 }
