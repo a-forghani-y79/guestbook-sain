@@ -1,6 +1,6 @@
-package com.liferay.docs.gueatbook.portlet.portlet;
+package com.liferay.docs.guestbook.portlet.portlet;
 
-import com.liferay.docs.gueatbook.portlet.constants.GuestbookWebPortletKeys;
+import com.liferay.docs.guestbook.portlet.constants.GuestbookWebPortletKeys;
 
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
 
