@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.search.Indexable;
 import com.liferay.portal.kernel.search.IndexableType;
 import com.liferay.portal.kernel.service.BaseLocalService;
 import com.liferay.portal.kernel.service.PersistedModelLocalService;
+import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.transaction.Isolation;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
@@ -75,6 +76,10 @@ public interface GuestBookLocalService
 	 */
 	@Indexable(type = IndexableType.REINDEX)
 	public GuestBook addGuestBook(GuestBook guestBook);
+
+	public GuestBook addGuestBook(
+			long userId, String name, ServiceContext serviceContext)
+		throws PortalException;
 
 	/**
 	 * Creates a new guest book with the primary key. Does not add the guest book to the database.
@@ -247,6 +252,16 @@ public interface GuestBookLocalService
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<GuestBook> getGuestBooks(int start, int end);
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<GuestBook> getGuestbooks(long groupId);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<GuestBook> getGuestbooks(long groupId, int start, int end);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<GuestBook> getGuestbooks(
+		long groupId, int start, int end, OrderByComparator<GuestBook> obc);
+
 	/**
 	 * Returns all the guest books matching the UUID and company.
 	 *
@@ -280,6 +295,9 @@ public interface GuestBookLocalService
 	 */
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getGuestBooksCount();
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getGuestBooksCount(long groupId);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public IndexableActionableDynamicQuery getIndexableActionableDynamicQuery();

@@ -55,6 +55,17 @@ public class GuestBookEntryLocalServiceUtil {
 		return getService().addGuestBookEntry(guestBookEntry);
 	}
 
+	public static com.liferay.docs.guestbook.model.GuestBookEntry
+			addGuestbookEntry(
+				long userId, long guestbookId, String name, String email,
+				String message,
+				com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return getService().addGuestbookEntry(
+			userId, guestbookId, name, email, message, serviceContext);
+	}
+
 	/**
 	 * Creates a new guest book entry with the primary key. Does not add the guest book entry to the database.
 	 *
@@ -77,6 +88,13 @@ public class GuestBookEntryLocalServiceUtil {
 		return getService().createPersistedModel(primaryKeyObj);
 	}
 
+	public static com.liferay.docs.guestbook.model.GuestBookEntry
+		deleteGuestbookEntry(
+			com.liferay.docs.guestbook.model.GuestBookEntry entry) {
+
+		return getService().deleteGuestbookEntry(entry);
+	}
+
 	/**
 	 * Deletes the guest book entry from the database. Also notifies the appropriate model listeners.
 	 *
@@ -92,6 +110,14 @@ public class GuestBookEntryLocalServiceUtil {
 			com.liferay.docs.guestbook.model.GuestBookEntry guestBookEntry) {
 
 		return getService().deleteGuestBookEntry(guestBookEntry);
+	}
+
+	public static com.liferay.docs.guestbook.model.GuestBookEntry
+			deleteGuestbookEntry(long entryId)
+		throws com.liferay.docs.guestbook.exception.
+			NoSuchGuestBookEntryException {
+
+		return getService().deleteGuestbookEntry(entryId);
 	}
 
 	/**
@@ -259,6 +285,32 @@ public class GuestBookEntryLocalServiceUtil {
 		return getService().getGuestBookEntries(start, end);
 	}
 
+	public static java.util.List
+		<com.liferay.docs.guestbook.model.GuestBookEntry> getGuestbookEntries(
+			long groupId, long guestbookId) {
+
+		return getService().getGuestbookEntries(groupId, guestbookId);
+	}
+
+	public static java.util.List
+		<com.liferay.docs.guestbook.model.GuestBookEntry> getGuestbookEntries(
+				long groupId, long guestbookId, int start, int end)
+			throws com.liferay.portal.kernel.exception.SystemException {
+
+		return getService().getGuestbookEntries(
+			groupId, guestbookId, start, end);
+	}
+
+	public static java.util.List
+		<com.liferay.docs.guestbook.model.GuestBookEntry> getGuestbookEntries(
+			long groupId, long guestbookId, int start, int end,
+			com.liferay.portal.kernel.util.OrderByComparator
+				<com.liferay.docs.guestbook.model.GuestBookEntry> obc) {
+
+		return getService().getGuestbookEntries(
+			groupId, guestbookId, start, end, obc);
+	}
+
 	/**
 	 * Returns all the guest book entries matching the UUID and company.
 	 *
@@ -303,6 +355,17 @@ public class GuestBookEntryLocalServiceUtil {
 	 */
 	public static int getGuestBookEntriesCount() {
 		return getService().getGuestBookEntriesCount();
+	}
+
+	public static int getGuestbookEntriesCount(long groupId, long guestbookId) {
+		return getService().getGuestbookEntriesCount(groupId, guestbookId);
+	}
+
+	public static com.liferay.docs.guestbook.model.GuestBookEntry
+			getGuestbookEntry(long entryId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return getService().getGuestbookEntry(entryId);
 	}
 
 	/**
@@ -375,6 +438,17 @@ public class GuestBookEntryLocalServiceUtil {
 			com.liferay.docs.guestbook.model.GuestBookEntry guestBookEntry) {
 
 		return getService().updateGuestBookEntry(guestBookEntry);
+	}
+
+	public static com.liferay.docs.guestbook.model.GuestBookEntry
+			updateGuestbookEntry(
+				long userId, long guestbookId, long entryId, String name,
+				String email, String message,
+				com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return getService().updateGuestbookEntry(
+			userId, guestbookId, entryId, name, email, message, serviceContext);
 	}
 
 	public static GuestBookEntryLocalService getService() {

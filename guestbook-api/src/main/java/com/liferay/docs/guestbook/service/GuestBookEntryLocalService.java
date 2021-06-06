@@ -14,6 +14,7 @@
 
 package com.liferay.docs.guestbook.service;
 
+import com.liferay.docs.guestbook.exception.NoSuchGuestBookEntryException;
 import com.liferay.docs.guestbook.model.GuestBookEntry;
 import com.liferay.exportimport.kernel.lar.PortletDataContext;
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
@@ -28,6 +29,7 @@ import com.liferay.portal.kernel.search.Indexable;
 import com.liferay.portal.kernel.search.IndexableType;
 import com.liferay.portal.kernel.service.BaseLocalService;
 import com.liferay.portal.kernel.service.PersistedModelLocalService;
+import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.transaction.Isolation;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
@@ -76,6 +78,11 @@ public interface GuestBookEntryLocalService
 	@Indexable(type = IndexableType.REINDEX)
 	public GuestBookEntry addGuestBookEntry(GuestBookEntry guestBookEntry);
 
+	public GuestBookEntry addGuestbookEntry(
+			long userId, long guestbookId, String name, String email,
+			String message, ServiceContext serviceContext)
+		throws PortalException;
+
 	/**
 	 * Creates a new guest book entry with the primary key. Does not add the guest book entry to the database.
 	 *
@@ -91,6 +98,8 @@ public interface GuestBookEntryLocalService
 	public PersistedModel createPersistedModel(Serializable primaryKeyObj)
 		throws PortalException;
 
+	public GuestBookEntry deleteGuestbookEntry(GuestBookEntry entry);
+
 	/**
 	 * Deletes the guest book entry from the database. Also notifies the appropriate model listeners.
 	 *
@@ -103,6 +112,9 @@ public interface GuestBookEntryLocalService
 	 */
 	@Indexable(type = IndexableType.DELETE)
 	public GuestBookEntry deleteGuestBookEntry(GuestBookEntry guestBookEntry);
+
+	public GuestBookEntry deleteGuestbookEntry(long entryId)
+		throws NoSuchGuestBookEntryException;
 
 	/**
 	 * Deletes the guest book entry with the primary key from the database. Also notifies the appropriate model listeners.
@@ -227,6 +239,20 @@ public interface GuestBookEntryLocalService
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<GuestBookEntry> getGuestBookEntries(int start, int end);
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<GuestBookEntry> getGuestbookEntries(
+		long groupId, long guestbookId);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<GuestBookEntry> getGuestbookEntries(
+			long groupId, long guestbookId, int start, int end)
+		throws SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<GuestBookEntry> getGuestbookEntries(
+		long groupId, long guestbookId, int start, int end,
+		OrderByComparator<GuestBookEntry> obc);
+
 	/**
 	 * Returns all the guest book entries matching the UUID and company.
 	 *
@@ -260,6 +286,13 @@ public interface GuestBookEntryLocalService
 	 */
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getGuestBookEntriesCount();
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getGuestbookEntriesCount(long groupId, long guestbookId);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public GuestBookEntry getGuestbookEntry(long entryId)
+		throws PortalException;
 
 	/**
 	 * Returns the guest book entry with the primary key.
@@ -315,5 +348,10 @@ public interface GuestBookEntryLocalService
 	 */
 	@Indexable(type = IndexableType.REINDEX)
 	public GuestBookEntry updateGuestBookEntry(GuestBookEntry guestBookEntry);
+
+	public GuestBookEntry updateGuestbookEntry(
+			long userId, long guestbookId, long entryId, String name,
+			String email, String message, ServiceContext serviceContext)
+		throws PortalException;
 
 }
