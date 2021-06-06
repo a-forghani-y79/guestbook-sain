@@ -1,2 +1,9 @@
 <%@ include file="../init.jsp"%>
-<h1>hi aliiii</h1>
+
+<p>
+    <b><liferay-ui:message key="guestbookweb.caption"/></b>
+</p>
+
+<aui:button-row>
+    <aui:button value="Add Entry"/>
+</aui:button-row>
