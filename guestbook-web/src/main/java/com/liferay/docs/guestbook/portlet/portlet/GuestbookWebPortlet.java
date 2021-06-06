@@ -2,11 +2,14 @@ package com.liferay.docs.guestbook.portlet.portlet;
 
 import com.liferay.docs.guestbook.portlet.constants.GuestbookWebPortletKeys;
 
+import com.liferay.docs.guestbook.service.GuestBookEntryLocalService;
+import com.liferay.docs.guestbook.service.GuestBookLocalService;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
 
 import javax.portlet.Portlet;
 
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author jinos
@@ -30,4 +33,9 @@ import org.osgi.service.component.annotations.Component;
         service = Portlet.class
 )
 public class GuestbookWebPortlet extends MVCPortlet {
+    @Reference
+    private GuestBookLocalService guestBookLocalService;
+    @Reference
+    private GuestBookEntryLocalService guestBookLocalEntryService;
+
 }
