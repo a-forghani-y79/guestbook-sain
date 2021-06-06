@@ -19,6 +19,9 @@ import com.liferay.portal.kernel.util.PortalUtil;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  * @author jinos
  */
@@ -47,17 +50,17 @@ public class GuestbookWebPortlet extends MVCPortlet {
     private GuestBookEntryLocalService guestBookEntryLocalService;
 
     public void addEntry(ActionRequest request, ActionResponse response) throws PortalException {
-        ServiceContext serviceContext = ServiceContextFactory.getInstance(GuestBookEntry.class.getName(),request);
+        ServiceContext serviceContext = ServiceContextFactory.getInstance(GuestBookEntry.class.getName(), request);
 
         //fetch data from request
-        String name = ParamUtil.getString(request,"name");
-        String email = ParamUtil.getString(request,"email");
-        String message = ParamUtil.getString(request,"message");
-        long entryId = ParamUtil.getLong(request,"entryId");
-        long guestbookId = ParamUtil.getLong(request,"guestbookId");
+        String name = ParamUtil.getString(request, "name");
+        String email = ParamUtil.getString(request, "email");
+        String message = ParamUtil.getString(request, "message");
+        long entryId = ParamUtil.getLong(request, "entryId");
+        long guestbookId = ParamUtil.getLong(request, "guestbookId");
 
 
-        if (entryId>0){
+        if (entryId > 0) {
             //that means we should update entry
             // shroud with try catch for if got exception, copy request params into response and render edit_entry.jsp
             try {
@@ -65,22 +68,32 @@ public class GuestbookWebPortlet extends MVCPortlet {
 
                 //find a replace for this
                 response.setRenderParameter("guestbookId", Long.toString(guestbookId));
-            }catch (Exception e){
+            } catch (Exception e) {
                 System.out.println(e);
-                PortalUtil.copyRequestParameters(request,response);
+                PortalUtil.copyRequestParameters(request, response);
                 response.setRenderParameter("mcvPath", "/guestbook/edit_entry.jsp");
             }
 
-        }else {
+        } else {
             //that means we should create new entry
-            try{
-                guestBookEntryLocalService.addGuestbookEntry(serviceContext.getUserId(),guestbookId,name,email,message,serviceContext);
-                response.setRenderParameter("guestbookId",Long.toString(guestbookId));
-            }catch (Exception e){
+            try {
+                guestBookEntryLocalService.addGuestbookEntry(serviceContext.getUserId(), guestbookId, name, email, message, serviceContext);
+                response.setRenderParameter("guestbookId", Long.toString(guestbookId));
+            } catch (Exception e) {
                 System.out.println(e);
-                PortalUtil.copyRequestParameters(request,response);
-                response.setRenderParameter("mvcPath","/guestbook/edit_entry.jsp");
+                PortalUtil.copyRequestParameters(request, response);
+                response.setRenderParameter("mvcPath", "/guestbook/edit_entry.jsp");
             }
+        }
+    }
+
+    public void deleteEntry(ActionRequest request, ActionResponse response) throws PortalException {
+        long entryId = ParamUtil.getLong(request, "entryId");
+        try {
+            guestBookEntryLocalService.deleteGuestBookEntry(entryId);
+        } catch (Exception e) {
+            Logger.getLogger(GuestbookWebPortlet.class.getName()).log(
+                    Level.SEVERE, null, e);
         }
     }
 
