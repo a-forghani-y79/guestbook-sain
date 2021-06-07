@@ -24,7 +24,6 @@ import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.Validator;
-import com.sun.tools.javac.tree.DCTree;
 import org.osgi.service.component.annotations.Component;
 
 import java.util.Date;
