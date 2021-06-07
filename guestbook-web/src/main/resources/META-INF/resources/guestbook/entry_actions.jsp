@@ -1,7 +1,3 @@
-<%@ page import="com.liferay.portal.kernel.util.ParamUtil" %>
-<%@ page import="com.liferay.taglib.search.ResultRow" %>
-<%@ page import="com.liferay.portal.kernel.util.WebKeys" %>
-<%@ page import="com.liferay.docs.guestbook.model.GuestBookEntry" %>
 <%@include file="../init.jsp" %>
 
 <%

@@ -1,7 +1,3 @@
-<%@ page import="com.liferay.portal.kernel.util.ParamUtil" %>
-<%@ page import="com.liferay.docs.guestbook.model.GuestBookEntry" %>
-<%@ page import="com.liferay.docs.guestbook.service.GuestBookEntryLocalService" %>
-<%@ page import="com.liferay.docs.guestbook.service.GuestBookEntryLocalServiceUtil" %>
 <%@ include file="../init.jsp"%>
 <liferay-portlet:renderURL var="viewURL">
     <portlet:param name="mcvPath" value="/guestbook/view.jsp" />
