@@ -18,7 +18,7 @@ long guestbookId = Long.parseLong((String) request.getAttribute("guestbookId"));
     <liferay-ui:search-container-column-text property="name"/>
     <liferay-ui:search-container-column-text property="email"/>
     <liferay-ui:search-container-column-text property="message"/>
-    <liferay-ui:search-container-column-jsp path="/gusetbook/entry_action.jsp" align="right"/>
+    <liferay-ui:search-container-column-jsp path="/gusetbook/entry_actions.jsp" align="right"/>
 </liferay-ui:search-container-row>
 <%--???--%>
 <liferay-ui:search-iterator/>
