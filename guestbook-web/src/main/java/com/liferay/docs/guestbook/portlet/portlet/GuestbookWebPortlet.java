@@ -1,5 +1,6 @@
 package com.liferay.docs.guestbook.portlet.portlet;
 
+import com.liferay.docs.guestbook.model.GuestBook;
 import com.liferay.docs.guestbook.model.GuestBookEntry;
 import com.liferay.docs.guestbook.portlet.constants.GuestbookWebPortletKeys;
 
@@ -8,9 +9,7 @@ import com.liferay.docs.guestbook.service.GuestBookLocalService;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
 
-import javax.portlet.ActionRequest;
-import javax.portlet.ActionResponse;
-import javax.portlet.Portlet;
+import javax.portlet.*;
 
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextFactory;
@@ -19,6 +18,8 @@ import com.liferay.portal.kernel.util.PortalUtil;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
+import java.io.IOException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -97,4 +98,30 @@ public class GuestbookWebPortlet extends MVCPortlet {
         }
     }
 
+    @Override
+    public void render(RenderRequest renderRequest, RenderResponse renderResponse) throws IOException, PortletException {
+        try {
+            ServiceContext serviceContext = ServiceContextFactory.getInstance(GuestBook.class.getName(), renderRequest);
+            long groupId = ParamUtil.getLong(renderRequest,"groupId");
+            long guestbookId = ParamUtil.getLong(renderRequest,"guestbookId");
+
+            List<GuestBook> guestBooks = guestBookLocalService.getGuestbooks(groupId);
+
+
+            //create guest book with name Main if cant find any guestbook
+            if (guestBooks.isEmpty()){
+                GuestBook guestBook = guestBookLocalService.addGuestBook(serviceContext.getUserId(),"Main",serviceContext);
+                guestbookId = guestBook.getGuestbookId();
+            }
+
+            if (guestbookId==0)
+                guestbookId = guestBooks.get(0).getGuestbookId();
+
+            renderRequest.setAttribute("guestbookId",guestbookId);
+
+        } catch (Exception e) {
+            throw new PortletException(e);
+        }
+        super.render(renderRequest, renderResponse);
+    }
 }
