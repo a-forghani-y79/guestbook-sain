@@ -5,7 +5,6 @@
 <liferay-portlet:actionURL name="addEntry" var="addEntryURL"/>
 <%
 long entryId = ParamUtil.getLong(request,"entryId");
-
     GuestBookEntry entry = null;
     if (entryId>0){
         entry = GuestBookEntryLocalServiceUtil.getGuestbookEntry(entryId);
@@ -14,7 +13,7 @@ long entryId = ParamUtil.getLong(request,"entryId");
     long guestbookId = ParamUtil.getLong(request,"guestbookId");
 %>
 
-<aui:form action="<%= addEntryURL%>" name="<portlet:namespace/>fm">
+<aui:form action="<%=addEntryURL%>" name="<portlet:namespace/>fm">
     <aui:model-context bean="<%=entry%>" model="<%=GuestBookEntry.class%>"/>
     <aui:fieldset>
         <aui:input name="name"/>

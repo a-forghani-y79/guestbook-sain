@@ -102,11 +102,10 @@ public class GuestbookWebPortlet extends MVCPortlet {
     public void render(RenderRequest renderRequest, RenderResponse renderResponse) throws IOException, PortletException {
         try {
             ServiceContext serviceContext = ServiceContextFactory.getInstance(GuestBook.class.getName(), renderRequest);
-            long groupId = ParamUtil.getLong(renderRequest,"groupId");
+            long groupId = serviceContext.getScopeGroupId();
             long guestbookId = ParamUtil.getLong(renderRequest,"guestbookId");
 
             List<GuestBook> guestBooks = guestBookLocalService.getGuestbooks(groupId);
-
 
             //create guest book with name Main if cant find any guestbook
             if (guestBooks.isEmpty()){
