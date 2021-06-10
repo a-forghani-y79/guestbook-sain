@@ -1,16 +1,17 @@
-<%@ include file="../init.jsp"%>
+<%@ include file="../init.jsp" %>
 <liferay-portlet:renderURL var="viewURL">
-    <portlet:param name="mcvPath" value="/guestbook/view.jsp" />
+    <portlet:param name="mcvPath" value="/guestbook/view.jsp"/>
 </liferay-portlet:renderURL>
 <liferay-portlet:actionURL name="addEntry" var="addEntryURL"/>
 <%
-long entryId = ParamUtil.getLong(request,"entryId");
+    long entryId = ParamUtil.getLong(request, "entryId");
     GuestBookEntry entry = null;
-    if (entryId>0){
+    if (entryId > 0) {
         entry = GuestBookEntryLocalServiceUtil.getGuestbookEntry(entryId);
     }
 
-    long guestbookId = ParamUtil.getLong(request,"guestbookId");
+    long guestbookId = ParamUtil.getLong(request, "guestbookId");
+
 %>
 
 <aui:form action="<%=addEntryURL%>" name="<portlet:namespace/>fm">
@@ -20,7 +21,7 @@ long entryId = ParamUtil.getLong(request,"entryId");
         <aui:input name="email"/>
         <aui:input name="message"/>
         <aui:input name="entryId" type="hidden"/>
-        <aui:input name="guestbookId" type="hidden" value="<%=entry==null?guestbookId:entry.getGuestbookId()%>"/>
+        <aui:input name="guestbookId" type="hidden" value="<%=entry==null ? guestbookId : entry.getGuestbookId()%>"/>
     </aui:fieldset>
     <aui:button-row>
         <aui:button type="submit"/>

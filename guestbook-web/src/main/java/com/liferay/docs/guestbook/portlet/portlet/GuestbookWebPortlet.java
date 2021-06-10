@@ -72,7 +72,7 @@ public class GuestbookWebPortlet extends MVCPortlet {
             } catch (Exception e) {
                 System.out.println(e);
                 PortalUtil.copyRequestParameters(request, response);
-                response.setRenderParameter("mcvPath", "/guestbook/edit_entry.jsp");
+                response.setRenderParameter("mcvPath", "/guestbook/view.jsp");
             }
 
         } else {
@@ -83,7 +83,7 @@ public class GuestbookWebPortlet extends MVCPortlet {
             } catch (Exception e) {
                 System.out.println(e);
                 PortalUtil.copyRequestParameters(request, response);
-                response.setRenderParameter("mvcPath", "/guestbook/edit_entry.jsp");
+                response.setRenderParameter("mvcPath", "/guestbook/view.jsp");
             }
         }
     }

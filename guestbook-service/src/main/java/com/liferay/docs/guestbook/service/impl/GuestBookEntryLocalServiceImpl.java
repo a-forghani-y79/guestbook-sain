@@ -99,7 +99,7 @@ public class GuestBookEntryLocalServiceImpl
         User user = userLocalService.getUserById(userId);
         Date date = new Date();
         validate(name, email, message);
-        GuestBookEntry entry = guestBookEntryPersistence.findByPrimaryKey(guestbookId);
+        GuestBookEntry entry = guestBookEntryPersistence.findByPrimaryKey(entryId);
         entry.setUserId(userId);
         entry.setUserName(user.getFullName());
         entry.setModifiedDate(serviceContext.getModifiedDate(date));
