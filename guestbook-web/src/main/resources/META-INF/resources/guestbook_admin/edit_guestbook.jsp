@@ -7,12 +7,13 @@ long guestbookId = ParamUtil.getLong(request,"guestbookId");
     if (guestbookId>0){
         guestBook = GuestBookLocalServiceUtil.getGuestBook(guestbookId);
     }
+    System.err.println("salam balam");
 %>
 <portlet:renderURL var="viewURL">
     <portlet:param name="mcvPath" value="/guestbook_admin/view.jsp" />
 </portlet:renderURL>
 
-<portlet:actionURL name="<%=guestBook==null?"addGuestBook":"updateGuestBook"%>" var="editGuestbookURL"/>
+<portlet:actionURL name="<%=guestBook==null?"addGuestbook":"updateGuestbook"%>" var="editGuestbookURL"/>
 
 <aui:form action="<%=editGuestbookURL%>" name="fm">
     <aui:model-context bean="<%=guestBook%>" model="<%=GuestBook.class%>"/>

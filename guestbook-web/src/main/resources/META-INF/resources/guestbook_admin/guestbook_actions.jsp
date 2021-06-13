@@ -9,7 +9,7 @@ GuestBook guestBook = (GuestBook) resultRow.getObject();
 <liferay-ui:icon-menu>
     <portlet:renderURL var="editURL">
         <portlet:param name="guestbookId" value="<%=String.valueOf(guestBook.getGuestbookId())%>" />
-        <portlet:param name="mvcPath" value="./guestbook_admin/edit_guestbook.jsp" />
+        <portlet:param name="mvcPath" value="/guestbook_admin/edit_guestbook.jsp" />
     </portlet:renderURL>
     <liferay-ui:icon icon="edit" message="Edit" url="<%=editURL.toString()%>"/>
     <portlet:renderURL var="deleteURL">
