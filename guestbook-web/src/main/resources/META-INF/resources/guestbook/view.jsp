@@ -1,8 +1,3 @@
-<%@ page import="com.liferay.docs.guestbook.model.GuestBook" %>
-<%@ page import="java.util.List" %>
-<%@ page import="com.liferay.docs.guestbook.service.GuestBookLocalServiceUtil" %>
-<%@ page import="com.liferay.petra.string.StringPool" %>
-<%@ page import="com.liferay.portal.kernel.util.*" %>
 <%@include file="../init.jsp" %>
 <liferay-ui:success key="entryAdded" message="entry-added"/>
 <liferay-ui:success key="entryDeleted" message="entry-deleted" />

@@ -1,4 +1,3 @@
-<%@ page import="com.liferay.docs.guestbook.model.GuestBook" %>
 <%@ include file="./../init.jsp" %>
 
 <%

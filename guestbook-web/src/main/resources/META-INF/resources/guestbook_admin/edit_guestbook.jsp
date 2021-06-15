@@ -1,5 +1,3 @@
-<%@ page import="com.liferay.docs.guestbook.model.GuestBook" %>
-<%@ page import="com.liferay.docs.guestbook.service.GuestBookLocalServiceUtil" %>
 <%@ include file="./../init.jsp" %>
 <%
 long guestbookId = ParamUtil.getLong(request,"guestbookId");

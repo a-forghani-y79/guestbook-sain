@@ -13,6 +13,15 @@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
 <%@ page import="com.liferay.taglib.search.ResultRow" %>
 <%@ page import="com.liferay.portal.kernel.util.WebKeys" %>
 <%@ page import="com.liferay.docs.guestbook.model.GuestBookEntry" %>
+<%@ page import="com.liferay.docs.guestbook.model.GuestBook" %>
+<%@ page import="com.liferay.docs.guestbook.model.GuestBook" %>
+<%@ page import="com.liferay.docs.guestbook.service.GuestBookLocalServiceUtil" %>
+<%@ page import="com.liferay.docs.guestbook.service.GuestBookLocalServiceUtil" %>
+<%@ page import="com.liferay.docs.guestbook.model.GuestBook" %>
+<%@ page import="java.util.List" %>
+<%@ page import="com.liferay.docs.guestbook.service.GuestBookLocalServiceUtil" %>
+<%@ page import="com.liferay.petra.string.StringPool" %>
+<%@ page import="com.liferay.portal.kernel.util.*" %>
 
 <liferay-theme:defineObjects />
 

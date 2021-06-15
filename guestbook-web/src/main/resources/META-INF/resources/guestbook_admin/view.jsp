@@ -1,4 +1,3 @@
-<%@ page import="com.liferay.docs.guestbook.service.GuestBookLocalServiceUtil" %>
 <%@ include file="./../init.jsp" %>
 <%--can't get message from language.properties--%>
 <%--<liferay-ui:success key="guestbookAdded" message="guestbook-added"/>--%>
