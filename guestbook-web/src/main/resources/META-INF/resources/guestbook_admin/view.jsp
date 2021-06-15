@@ -5,6 +5,7 @@
 <%--<liferay-ui:success key="guestbookDeleted" message="guestbook-deleted"/>--%>
 <%--<liferay-ui:success key="guestbookUpdated" message="guestbook-updated"/>--%>
 
+
 <liferay-ui:success key="guestbookAdded" message="Guestbook added successfully."/>
 <liferay-ui:success key="guestbookDeleted" message="Guestbook deleted successfully."/>
 <liferay-ui:success key="guestbookUpdated" message="Guestbook updated successfully."/>
