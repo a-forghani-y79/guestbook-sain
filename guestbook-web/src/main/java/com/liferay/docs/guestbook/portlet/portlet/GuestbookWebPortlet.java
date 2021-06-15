@@ -13,6 +13,8 @@ import javax.portlet.*;
 
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextFactory;
+import com.liferay.portal.kernel.servlet.SessionErrors;
+import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PortalUtil;
 import org.osgi.service.component.annotations.Component;
@@ -69,8 +71,12 @@ public class GuestbookWebPortlet extends MVCPortlet {
 
                 //find a replace for this
                 response.setRenderParameter("guestbookId", Long.toString(guestbookId));
+
+                //display message
+                SessionMessages.add(request, "entryAdded");
             } catch (Exception e) {
-                System.out.println(e);
+                //display error
+                SessionErrors.add(request, e.getClass().getName());
                 PortalUtil.copyRequestParameters(request, response);
                 response.setRenderParameter("mcvPath", "/guestbook/view.jsp");
             }
@@ -80,10 +86,14 @@ public class GuestbookWebPortlet extends MVCPortlet {
             try {
                 guestBookEntryLocalService.addGuestbookEntry(serviceContext.getUserId(), guestbookId, name, email, message, serviceContext);
                 response.setRenderParameter("guestbookId", Long.toString(guestbookId));
+                //display message
+                SessionMessages.add(request, "entryAdded");
             } catch (Exception e) {
-                System.out.println(e);
+                //display error
+                SessionErrors.add(request, e.getClass().getName());
                 PortalUtil.copyRequestParameters(request, response);
                 response.setRenderParameter("mvcPath", "/guestbook/view.jsp");
+
             }
         }
     }
@@ -92,7 +102,11 @@ public class GuestbookWebPortlet extends MVCPortlet {
         long entryId = ParamUtil.getLong(request, "entryId");
         try {
             guestBookEntryLocalService.deleteGuestBookEntry(entryId);
+            //display message
+            SessionMessages.add(request, "entryDeleted");
         } catch (Exception e) {
+            //display error
+            SessionErrors.add(request, e.getClass().getName());
             Logger.getLogger(GuestbookWebPortlet.class.getName()).log(
                     Level.SEVERE, null, e);
         }
@@ -103,20 +117,20 @@ public class GuestbookWebPortlet extends MVCPortlet {
         try {
             ServiceContext serviceContext = ServiceContextFactory.getInstance(GuestBook.class.getName(), renderRequest);
             long groupId = serviceContext.getScopeGroupId();
-            long guestbookId = ParamUtil.getLong(renderRequest,"guestbookId");
+            long guestbookId = ParamUtil.getLong(renderRequest, "guestbookId");
 
             List<GuestBook> guestBooks = guestBookLocalService.getGuestbooks(groupId);
 
             //create guest book with name Main if cant find any guestbook
-            if (guestBooks.isEmpty()){
-                GuestBook guestBook = guestBookLocalService.addGuestBook(serviceContext.getUserId(),"Main",serviceContext);
+            if (guestBooks.isEmpty()) {
+                GuestBook guestBook = guestBookLocalService.addGuestBook(serviceContext.getUserId(), "Main", serviceContext);
                 guestbookId = guestBook.getGuestbookId();
             }
 
-            if (guestbookId==0)
+            if (guestbookId == 0)
                 guestbookId = guestBooks.get(0).getGuestbookId();
 
-            renderRequest.setAttribute("guestbookId",guestbookId);
+            renderRequest.setAttribute("guestbookId", guestbookId);
 
         } catch (Exception e) {
             throw new PortletException(e);

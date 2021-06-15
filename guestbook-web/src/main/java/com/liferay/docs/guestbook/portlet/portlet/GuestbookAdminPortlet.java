@@ -7,6 +7,8 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextFactory;
+import com.liferay.portal.kernel.servlet.SessionErrors;
+import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.ParamUtil;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -42,7 +44,10 @@ public class GuestbookAdminPortlet extends MVCPortlet {
         String name = ParamUtil.getString(request, "name");
         try {
             guestBookLocalService.addGuestBook(serviceContext.getUserId(), name, serviceContext);
+            //display message
+            SessionMessages.add(request, "guestbookAdded");
         } catch (Exception e) {
+            SessionErrors.add(request,e.getClass().getName());
             Logger.getLogger(GuestbookAdminPortlet.class.getName()).log(Level.SEVERE, null, e);
             response.setRenderParameter("mvcPath", "/guestbook_admin/edit_guestbook.jsp");
         }
@@ -54,7 +59,10 @@ public class GuestbookAdminPortlet extends MVCPortlet {
 
         try {
             guestBookLocalService.deleteGuestbook(guestbookId, serviceContext);
+            //display message
+            SessionMessages.add(request, "guestbookDeleted");
         } catch (Exception e) {
+            SessionErrors.add(request,e.getClass().getName());
             Logger.getLogger(GuestbookAdminPortlet.class.getName()).log(Level.SEVERE, null, e);
         }
     }
@@ -65,7 +73,10 @@ public class GuestbookAdminPortlet extends MVCPortlet {
         String name = ParamUtil.getString(request, "name");
         try {
             guestBookLocalService.updateGuestbook(serviceContext.getUserId(), guestbookId, name, serviceContext);
+            //display message
+            SessionMessages.add(request, "guestbookUpdated");
         } catch (Exception e) {
+            SessionErrors.add(request,e.getClass().getName());
             Logger.getLogger(GuestbookAdminPortlet.class.getName()).log(Level.SEVERE, null, e);
             response.setRenderParameter("mvcPath", "/guestbook_admin/edit_guestbook.jsp");
         }
