@@ -1,8 +1,13 @@
 <%@ page import="com.liferay.docs.guestbook.service.GuestBookLocalServiceUtil" %>
 <%@ include file="./../init.jsp" %>
-<liferay-ui:success key="guestbookAdded" message="guestbook-added"/>
-<liferay-ui:success key="guestbookDeleted" message="guestbook-deleted"/>
-<liferay-ui:success key="guestbookUpdated" message="guestbook-updated"/>
+<%--can't get message from language.properties--%>
+<%--<liferay-ui:success key="guestbookAdded" message="guestbook-added"/>--%>
+<%--<liferay-ui:success key="guestbookDeleted" message="guestbook-deleted"/>--%>
+<%--<liferay-ui:success key="guestbookUpdated" message="guestbook-updated"/>--%>
+
+<liferay-ui:success key="guestbookAdded" message="Guestbook added successfully."/>
+<liferay-ui:success key="guestbookDeleted" message="Guestbook deleted successfully."/>
+<liferay-ui:success key="guestbookUpdated" message="Guestbook updated successfully."/>
 
 <liferay-ui:search-container total="<%= GuestBookLocalServiceUtil.getGuestBooksCount(scopeGroupId)%>">
     <liferay-ui:search-container-results
