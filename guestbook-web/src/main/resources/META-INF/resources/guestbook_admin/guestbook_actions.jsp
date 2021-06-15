@@ -12,8 +12,11 @@ GuestBook guestBook = (GuestBook) resultRow.getObject();
         <portlet:param name="mvcPath" value="/guestbook_admin/edit_guestbook.jsp" />
     </portlet:renderURL>
     <liferay-ui:icon icon="edit" message="Edit" url="<%=editURL.toString()%>"/>
-    <portlet:renderURL var="deleteURL">
+<%--    <portlet:renderURL var="deleteURL">--%>
+<%--        <portlet:param name="guestbookId" value="<%=String.valueOf(guestBook.getGuestbookId())%>" />--%>
+<%--    </portlet:renderURL>--%>
+    <portlet:actionURL var="deleteURL" name="deleteGuestbook">
         <portlet:param name="guestbookId" value="<%=String.valueOf(guestBook.getGuestbookId())%>" />
-    </portlet:renderURL>
+    </portlet:actionURL>
     <liferay-ui:icon icon="delete" message="Delete" url="<%=deleteURL.toString()%>"/>
 </liferay-ui:icon-menu>
