@@ -4,6 +4,9 @@
 <%@ page import="com.liferay.petra.string.StringPool" %>
 <%@ page import="com.liferay.portal.kernel.util.*" %>
 <%@include file="../init.jsp" %>
+<liferay-ui:success key="entryAdded" message="entry-added"/>
+<liferay-ui:success key="entryDeleted" message="entry-deleted" />
+
 
 <%
     long guestbookId = Long.valueOf((Long) request

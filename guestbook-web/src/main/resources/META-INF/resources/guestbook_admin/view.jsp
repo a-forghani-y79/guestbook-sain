@@ -1,5 +1,8 @@
 <%@ page import="com.liferay.docs.guestbook.service.GuestBookLocalServiceUtil" %>
 <%@ include file="./../init.jsp" %>
+<liferay-ui:success key="guestbookAdded" message="guestbook-added"/>
+<liferay-ui:success key="guestbookDeleted" message="guestbook-deleted"/>
+<liferay-ui:success key="guestbookUpdated" message="guestbook-updated"/>
 
 <liferay-ui:search-container total="<%= GuestBookLocalServiceUtil.getGuestBooksCount(scopeGroupId)%>">
     <liferay-ui:search-container-results
