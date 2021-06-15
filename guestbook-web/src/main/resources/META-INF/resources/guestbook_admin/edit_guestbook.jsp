@@ -7,7 +7,6 @@ long guestbookId = ParamUtil.getLong(request,"guestbookId");
     if (guestbookId>0){
         guestBook = GuestBookLocalServiceUtil.getGuestBook(guestbookId);
     }
-    System.err.println("salam balam");
 %>
 <portlet:renderURL var="viewURL">
     <portlet:param name="mcvPath" value="/guestbook_admin/view.jsp" />
