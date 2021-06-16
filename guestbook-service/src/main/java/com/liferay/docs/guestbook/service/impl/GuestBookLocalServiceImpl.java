@@ -22,6 +22,7 @@ import com.liferay.docs.guestbook.service.base.GuestBookLocalServiceBaseImpl;
 import com.liferay.portal.aop.AopService;
 
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.model.ResourceConstants;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.UserLocalService;
@@ -79,6 +80,8 @@ public class GuestBookLocalServiceImpl extends GuestBookLocalServiceBaseImpl {
         guestBook.setExpandoBridgeAttributes(serviceContext);
         guestBookPersistence.update(guestBook);
 
+        //register resource for permission system
+        resourceLocalService.addResources(user.getCompanyId(), groupId, userId, GuestBook.class.getName(), guestbookId, false, true, true);
         return guestBook;
     }
 
@@ -118,6 +121,7 @@ public class GuestBookLocalServiceImpl extends GuestBookLocalServiceBaseImpl {
         guestBook.setModifiedDate(serviceContext.getModifiedDate(now));
         guestBook.setExpandoBridgeAttributes(serviceContext);
         guestBookPersistence.update(guestBook);
+        resourceLocalService.updateResources(serviceContext.getCompanyId(), serviceContext.getScopeGroupId(), GuestBook.class.getName(), guestbookId, serviceContext.getModelPermissions());
         return guestBook;
     }
 
@@ -128,6 +132,7 @@ public class GuestBookLocalServiceImpl extends GuestBookLocalServiceBaseImpl {
             guestBookEntryLocalService.deleteGuestBookEntry(entry.getEntryId());
         }
         guestBookPersistence.remove(guestbookId);
+        resourceLocalService.deleteResource(serviceContext.getCompanyId(), GuestBook.class.getName(), ResourceConstants.SCOPE_INDIVIDUAL, guestbookId);
         return guestBook;
 
     }

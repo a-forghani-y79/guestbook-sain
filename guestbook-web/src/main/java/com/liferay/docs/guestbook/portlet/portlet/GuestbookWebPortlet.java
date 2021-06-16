@@ -2,7 +2,7 @@ package com.liferay.docs.guestbook.portlet.portlet;
 
 import com.liferay.docs.guestbook.model.GuestBook;
 import com.liferay.docs.guestbook.model.GuestBookEntry;
-import com.liferay.docs.guestbook.portlet.constants.GuestbookWebPortletKeys;
+import com.liferay.docs.guestbook.constants.GuestbookWebPortletKeys;
 
 import com.liferay.docs.guestbook.service.GuestBookEntryLocalService;
 import com.liferay.docs.guestbook.service.GuestBookLocalService;

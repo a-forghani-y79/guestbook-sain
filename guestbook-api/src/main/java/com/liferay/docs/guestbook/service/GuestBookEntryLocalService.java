@@ -98,7 +98,7 @@ public interface GuestBookEntryLocalService
 	public PersistedModel createPersistedModel(Serializable primaryKeyObj)
 		throws PortalException;
 
-	public GuestBookEntry deleteGuestbookEntry(GuestBookEntry entry);
+	public GuestBookEntry deleteGuestbookEntry(GuestBookEntry entry) throws PortalException;
 
 	/**
 	 * Deletes the guest book entry from the database. Also notifies the appropriate model listeners.
@@ -114,7 +114,7 @@ public interface GuestBookEntryLocalService
 	public GuestBookEntry deleteGuestBookEntry(GuestBookEntry guestBookEntry);
 
 	public GuestBookEntry deleteGuestbookEntry(long entryId)
-		throws NoSuchGuestBookEntryException;
+		throws NoSuchGuestBookEntryException, PortalException;
 
 	/**
 	 * Deletes the guest book entry with the primary key from the database. Also notifies the appropriate model listeners.

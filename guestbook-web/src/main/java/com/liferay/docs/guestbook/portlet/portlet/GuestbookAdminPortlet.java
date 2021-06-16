@@ -1,7 +1,7 @@
 package com.liferay.docs.guestbook.portlet.portlet;
 
 import com.liferay.docs.guestbook.model.GuestBook;
-import com.liferay.docs.guestbook.portlet.constants.GuestbookWebPortletKeys;
+import com.liferay.docs.guestbook.constants.GuestbookWebPortletKeys;
 import com.liferay.docs.guestbook.service.GuestBookLocalService;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
