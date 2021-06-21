@@ -1,4 +1,4 @@
-package com.liferay.docs.guestbook.portlet.portlet;
+package com.liferay.docs.guestbook.portlet;
 
 import com.liferay.docs.guestbook.model.GuestBook;
 import com.liferay.docs.guestbook.model.GuestBookEntry;

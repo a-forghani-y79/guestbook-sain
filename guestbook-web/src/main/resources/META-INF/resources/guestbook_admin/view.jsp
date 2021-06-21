@@ -22,6 +22,7 @@
 
     <liferay-ui:search-iterator/>
 </liferay-ui:search-container>
+<p>space between search container and add btn</p>
 
 <aui:button-row cssClass="guestbook-admin-buttons">
     <portlet:renderURL var="addGuestbookURL">

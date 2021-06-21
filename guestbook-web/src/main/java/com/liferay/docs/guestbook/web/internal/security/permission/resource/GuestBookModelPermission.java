@@ -8,21 +8,30 @@ import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermi
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
+
 @Component(immediate = true)
 public class GuestBookModelPermission {
 
-    private static ModelResourcePermission<GuestBook> guestBookModelResourcePermission;
+    public static boolean contains(
+            PermissionChecker permissionChecker, GuestBook guestbook, String actionId) throws PortalException {
 
-
-    @Reference(target = "(resource.class.name=com.liferay.docs.guestbook.model.GuestBook",unbind = "-")
-    protected void setGuestBookModelResourcePermission(ModelResourcePermission<GuestBook> guestBookModelResourcePermission) {
-        GuestBookModelPermission.guestBookModelResourcePermission = guestBookModelResourcePermission;
+        return _guestbookModelResourcePermission.contains(permissionChecker, guestbook, actionId);
     }
 
-    public static boolean contains(PermissionChecker permissionChecker,long guestbookId, String actionId) throws PortalException {
-        return guestBookModelResourcePermission.contains(permissionChecker, guestbookId, actionId);
+    public static boolean contains(
+            PermissionChecker permissionChecker, long guestbookId, String actionId) throws PortalException {
+
+        return _guestbookModelResourcePermission.contains(permissionChecker, guestbookId, actionId);
     }
-    public static boolean contains(PermissionChecker permissionChecker,GuestBook guestBook, String actionId) throws PortalException {
-        return guestBookModelResourcePermission.contains(permissionChecker, guestBook, actionId);
+
+    @Reference(
+            target = "(model.class.name=com.liferay.docs.guestbook.model.GuestBook)",
+            unbind = "-")
+    protected void setEntryModelPermission(ModelResourcePermission<GuestBook> modelResourcePermission) {
+
+        _guestbookModelResourcePermission = modelResourcePermission;
     }
+
+    private static ModelResourcePermission<GuestBook>_guestbookModelResourcePermission;
+
 }

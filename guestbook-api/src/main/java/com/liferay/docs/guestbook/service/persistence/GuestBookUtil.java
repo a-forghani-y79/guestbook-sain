@@ -680,6 +680,73 @@ public class GuestBookUtil {
 	}
 
 	/**
+	 * Returns all the guest books that the user has permission to view where groupId = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @return the matching guest books that the user has permission to view
+	 */
+	public static List<GuestBook> filterFindByGroupId(long groupId) {
+		return getPersistence().filterFindByGroupId(groupId);
+	}
+
+	/**
+	 * Returns a range of all the guest books that the user has permission to view where groupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>GuestBookModelImpl</code>.
+	 * </p>
+	 *
+	 * @param groupId the group ID
+	 * @param start the lower bound of the range of guest books
+	 * @param end the upper bound of the range of guest books (not inclusive)
+	 * @return the range of matching guest books that the user has permission to view
+	 */
+	public static List<GuestBook> filterFindByGroupId(
+		long groupId, int start, int end) {
+
+		return getPersistence().filterFindByGroupId(groupId, start, end);
+	}
+
+	/**
+	 * Returns an ordered range of all the guest books that the user has permissions to view where groupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>GuestBookModelImpl</code>.
+	 * </p>
+	 *
+	 * @param groupId the group ID
+	 * @param start the lower bound of the range of guest books
+	 * @param end the upper bound of the range of guest books (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching guest books that the user has permission to view
+	 */
+	public static List<GuestBook> filterFindByGroupId(
+		long groupId, int start, int end,
+		OrderByComparator<GuestBook> orderByComparator) {
+
+		return getPersistence().filterFindByGroupId(
+			groupId, start, end, orderByComparator);
+	}
+
+	/**
+	 * Returns the guest books before and after the current guest book in the ordered set of guest books that the user has permission to view where groupId = &#63;.
+	 *
+	 * @param guestbookId the primary key of the current guest book
+	 * @param groupId the group ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next guest book
+	 * @throws NoSuchGuestBookException if a guest book with the primary key could not be found
+	 */
+	public static GuestBook[] filterFindByGroupId_PrevAndNext(
+			long guestbookId, long groupId,
+			OrderByComparator<GuestBook> orderByComparator)
+		throws com.liferay.docs.guestbook.exception.NoSuchGuestBookException {
+
+		return getPersistence().filterFindByGroupId_PrevAndNext(
+			guestbookId, groupId, orderByComparator);
+	}
+
+	/**
 	 * Removes all the guest books where groupId = &#63; from the database.
 	 *
 	 * @param groupId the group ID
@@ -696,6 +763,16 @@ public class GuestBookUtil {
 	 */
 	public static int countByGroupId(long groupId) {
 		return getPersistence().countByGroupId(groupId);
+	}
+
+	/**
+	 * Returns the number of guest books that the user has permission to view where groupId = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @return the number of matching guest books that the user has permission to view
+	 */
+	public static int filterCountByGroupId(long groupId) {
+		return getPersistence().filterCountByGroupId(groupId);
 	}
 
 	/**

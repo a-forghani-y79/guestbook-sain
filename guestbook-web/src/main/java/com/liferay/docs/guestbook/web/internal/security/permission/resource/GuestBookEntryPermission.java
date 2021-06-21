@@ -9,18 +9,25 @@ import org.osgi.service.component.annotations.Reference;
 
 @Component(immediate = true)
 public class GuestBookEntryPermission {
-    private static ModelResourcePermission<GuestBookEntry> guestBookEntryModelResourcePermission;
 
-    @Reference(target = "(model.class.name=com.liferay.docs.guestbook.model.guestBookEntry)",unbind = "-")
-    protected void setGuestBookEntryModelResourcePermission(ModelResourcePermission<GuestBookEntry> guestBookEntryModelResourcePermission) {
-        GuestBookEntryPermission.guestBookEntryModelResourcePermission = guestBookEntryModelResourcePermission;
+    public static boolean contains(
+            PermissionChecker permissionChecker, GuestBookEntry entry, String actionId) throws PortalException {
+        return _guestbookEntryModelResourcePermission.contains(permissionChecker, entry, actionId);
     }
 
-    public static boolean contains(PermissionChecker permissionChecker, GuestBookEntry guestBookEntry, String actionId) throws PortalException {
-        return guestBookEntryModelResourcePermission.contains(permissionChecker, guestBookEntry, actionId);
+    public static boolean contains(
+            PermissionChecker permissionChecker, long entryId, String actionId) throws PortalException {
+
+        return _guestbookEntryModelResourcePermission.contains(permissionChecker, entryId, actionId);
     }
-    public static boolean contains(PermissionChecker permissionChecker, long entryId, String actionId) throws PortalException {
-        return guestBookEntryModelResourcePermission.contains(permissionChecker, entryId, actionId);
+
+    @Reference(
+            target = "(model.class.name=com.liferay.docs.guestbook.model.GuestBookEntry)",
+            unbind = "-")
+    protected void setEntryModelPermission(ModelResourcePermission<GuestBookEntry> modelResourcePermission) {
+        _guestbookEntryModelResourcePermission = modelResourcePermission;
     }
+
+    private static ModelResourcePermission<GuestBookEntry>_guestbookEntryModelResourcePermission;
 
 }

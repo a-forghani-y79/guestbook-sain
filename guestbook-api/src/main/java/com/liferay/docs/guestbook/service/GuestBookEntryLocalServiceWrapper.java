@@ -87,7 +87,8 @@ public class GuestBookEntryLocalServiceWrapper
 
 	@Override
 	public com.liferay.docs.guestbook.model.GuestBookEntry deleteGuestbookEntry(
-		com.liferay.docs.guestbook.model.GuestBookEntry entry) {
+			com.liferay.docs.guestbook.model.GuestBookEntry entry)
+		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return _guestBookEntryLocalService.deleteGuestbookEntry(entry);
 	}
@@ -112,8 +113,7 @@ public class GuestBookEntryLocalServiceWrapper
 	@Override
 	public com.liferay.docs.guestbook.model.GuestBookEntry deleteGuestbookEntry(
 			long entryId)
-		throws com.liferay.docs.guestbook.exception.
-			NoSuchGuestBookEntryException {
+		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return _guestBookEntryLocalService.deleteGuestbookEntry(entryId);
 	}

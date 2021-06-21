@@ -1,6 +1,9 @@
-<?xml version="1.0"?><!DOCTYPE resource-action-mapping PUBLIC "-//Liferay//DTD Resource Action
+<?xml version="1.0"?>
+<!DOCTYPE resource-action-mapping PUBLIC "-//Liferay//DTD Resource Action
 Mapping 7.2.0//EN" "http://www.liferay.com/dtd/liferay-resource-action-mapping_7_2_0.dtd">
+
 <resource-action-mapping>
+
     <model-resource>
         <model-name>com.liferay.docs.guestbook</model-name>
         <portlet-ref>
@@ -26,6 +29,7 @@ Mapping 7.2.0//EN" "http://www.liferay.com/dtd/liferay-resource-action-mapping_7
             </guest-unsupported>
         </permissions>
     </model-resource>
+
     <model-resource>
         <model-name>com.liferay.docs.guestbook.model.GuestBook</model-name>
         <portlet-ref>
@@ -36,7 +40,7 @@ Mapping 7.2.0//EN" "http://www.liferay.com/dtd/liferay-resource-action-mapping_7
             <supports>
                 <action-key>ADD_ENTRY</action-key>
                 <action-key>DELETE</action-key>
-                <action-key>PERMISSION</action-key>
+                <action-key>PERMISSIONS</action-key>
                 <action-key>UPDATE</action-key>
                 <action-key>VIEW</action-key>
             </supports>
@@ -52,6 +56,7 @@ Mapping 7.2.0//EN" "http://www.liferay.com/dtd/liferay-resource-action-mapping_7
             </guest-unsupported>
         </permissions>
     </model-resource>
+
     <model-resource>
         <model-name>com.liferay.docs.guestbook.model.GuestBookEntry</model-name>
         <portlet-ref>
@@ -60,7 +65,7 @@ Mapping 7.2.0//EN" "http://www.liferay.com/dtd/liferay-resource-action-mapping_7
         <permissions>
             <supports>
                 <action-key>DELETE</action-key>
-                <action-key>PERMISSION</action-key>
+                <action-key>PERMISSIONS</action-key>
                 <action-key>UPDATE</action-key>
                 <action-key>VIEW</action-key>
             </supports>
@@ -75,4 +80,5 @@ Mapping 7.2.0//EN" "http://www.liferay.com/dtd/liferay-resource-action-mapping_7
             </guest-unsupported>
         </permissions>
     </model-resource>
+
 </resource-action-mapping>

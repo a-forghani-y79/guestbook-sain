@@ -14,7 +14,6 @@
 
 package com.liferay.docs.guestbook.service;
 
-import com.liferay.docs.guestbook.exception.NoSuchGuestBookEntryException;
 import com.liferay.docs.guestbook.model.GuestBookEntry;
 import com.liferay.exportimport.kernel.lar.PortletDataContext;
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
@@ -98,7 +97,8 @@ public interface GuestBookEntryLocalService
 	public PersistedModel createPersistedModel(Serializable primaryKeyObj)
 		throws PortalException;
 
-	public GuestBookEntry deleteGuestbookEntry(GuestBookEntry entry) throws PortalException;
+	public GuestBookEntry deleteGuestbookEntry(GuestBookEntry entry)
+		throws PortalException;
 
 	/**
 	 * Deletes the guest book entry from the database. Also notifies the appropriate model listeners.
@@ -114,7 +114,7 @@ public interface GuestBookEntryLocalService
 	public GuestBookEntry deleteGuestBookEntry(GuestBookEntry guestBookEntry);
 
 	public GuestBookEntry deleteGuestbookEntry(long entryId)
-		throws NoSuchGuestBookEntryException, PortalException;
+		throws PortalException;
 
 	/**
 	 * Deletes the guest book entry with the primary key from the database. Also notifies the appropriate model listeners.

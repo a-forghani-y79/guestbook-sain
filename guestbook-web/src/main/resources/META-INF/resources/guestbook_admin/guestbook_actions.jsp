@@ -1,3 +1,5 @@
+<%@ page import="com.liferay.docs.guestbook.web.internal.security.permission.resource.GuestBookPermission" %>
+<%@ page import="com.liferay.docs.guestbook.web.internal.security.permission.resource.GuestBookModelPermission" %>
 <%@ include file="./../init.jsp" %>
 
 <%
@@ -11,16 +13,31 @@
         <portlet:param name="mvcPath" value="/guestbook_admin/edit_guestbook.jsp"/>
     </portlet:renderURL>
     <liferay-ui:icon icon="edit" message="Edit" url="<%=editURL.toString()%>"/>
-    <%--    <portlet:renderURL var="deleteURL">--%>
-    <%--        <portlet:param name="guestbookId" value="<%=String.valueOf(guestBook.getGuestbookId())%>" />--%>
-    <%--    </portlet:renderURL>--%>
+
+    <c:if
+            test="<%=GuestBookModelPermission.contains(permissionChecker, guestBook.getGuestbookId(), ActionKeys.DELETE) %>">
+
+
     <portlet:actionURL var="deleteURL" name="deleteGuestbook">
-        <c:if test="<%=GuestBookPermission.contains(permissionChecker,guestBook.getGroupId(), ActionKeys.PERMISSIONS)%>">
-            <liferay-security:permissionsURL modelResource="<%=GuestBook.class.getName()%>"
-                                             modelResourceDescription="<%=guestBook.getName()%>"
-                                             resourcePrimKey="<%=String.valueOf(guestBook.getGuestbookId())%>"
-                                             var="permissionsURL"/> </c:if>
+        <portlet:param name="guestbookId"
+                       value="<%= String.valueOf(guestBook.getGuestbookId()) %>" />
         <portlet:param name="guestbookId" value="<%=String.valueOf(guestBook.getGuestbookId())%>"/>
     </portlet:actionURL>
     <liferay-ui:icon icon="delete" message="Delete" url="<%=deleteURL.toString()%>"/>
+    </c:if>
+
+    <c:if
+
+                test="<%=GuestBookModelPermission.contains(permissionChecker, guestBook.getGuestbookId(), ActionKeys.PERMISSIONS) %>">
+
+        <liferay-security:permissionsURL
+                modelResource="<%= GuestBook.class.getName() %>"
+                modelResourceDescription="<%= guestBook.getName() %>"
+                resourcePrimKey="<%= String.valueOf(guestBook.getGuestbookId()) %>"
+                var="permissionsURL" />
+
+        <liferay-ui:icon image="permissions" url="<%= permissionsURL %>" />
+
+    </c:if>
+
 </liferay-ui:icon-menu>

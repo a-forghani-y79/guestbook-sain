@@ -89,8 +89,9 @@ public class GuestBookEntryLocalServiceUtil {
 	}
 
 	public static com.liferay.docs.guestbook.model.GuestBookEntry
-		deleteGuestbookEntry(
-			com.liferay.docs.guestbook.model.GuestBookEntry entry) {
+			deleteGuestbookEntry(
+				com.liferay.docs.guestbook.model.GuestBookEntry entry)
+		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return getService().deleteGuestbookEntry(entry);
 	}
@@ -114,8 +115,7 @@ public class GuestBookEntryLocalServiceUtil {
 
 	public static com.liferay.docs.guestbook.model.GuestBookEntry
 			deleteGuestbookEntry(long entryId)
-		throws com.liferay.docs.guestbook.exception.
-			NoSuchGuestBookEntryException {
+		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return getService().deleteGuestbookEntry(entryId);
 	}
